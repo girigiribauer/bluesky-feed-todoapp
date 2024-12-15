@@ -11,3 +11,10 @@ Bluesky の TODO フィードを作ってみます
 npm install
 npm run dev
 ```
+
+## 公開・取り消しする
+
+```
+npm run publish
+npm run unpublish
+```
