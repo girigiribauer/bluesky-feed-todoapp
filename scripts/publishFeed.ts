@@ -23,7 +23,7 @@ import { AtpAgent } from "@atproto/api";
       did: "did:web:todoapp.bsky.girigiribauer.com",
       displayName: "TODO feed",
       description:
-        "TODO と頭につけた自分の投稿だけが表示されます\nDONE と返信すると消えます",
+        "TODO と頭につけた自分の投稿だけが表示されます\nDONE と返信すると消えます（テスト中）",
       createdAt: new Date().toISOString(),
     },
   });
