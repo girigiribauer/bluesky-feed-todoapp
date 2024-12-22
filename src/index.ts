@@ -1,6 +1,6 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
-import { getTodo } from "todo.js";
+import { getTodo } from "./todo.js";
 
 const app = new Hono();
 
