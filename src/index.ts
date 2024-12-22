@@ -1,9 +1,14 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
+import { getTodo } from "todo.js";
 
 const app = new Hono();
 
-app.get("/", (c) => c.text("TODOフィードです"));
+app.get("/", (c) =>
+  c.text(
+    "TODOフィードです https://github.com/girigiribauer/bluesky-feed-todoapp"
+  )
+);
 
 app.get("/.well-known/did.json", (c) =>
   c.json({
@@ -19,15 +24,14 @@ app.get("/.well-known/did.json", (c) =>
   })
 );
 
-app.get("/xrpc/app.bsky.feed.getFeedSkeleton", (c) =>
-  c.json({
-    feed: [
-      {
-        post: "at://did:plc:tsvcmd72oxp47wtixs4qllyi/app.bsky.feed.post/3lddr4syhxk2g",
-      },
-    ],
-  })
-);
+app.get("/xrpc/app.bsky.feed.getFeedSkeleton", async (c) => {
+  const todoPosts = await getTodo();
+  return c.json({
+    feed: todoPosts.map((uri) => ({
+      post: uri,
+    })),
+  });
+});
 
 const port = parseInt(process.env.PORT ?? "", 10) || 3000;
 console.log(`Server is running on http://localhost:${port}`);
