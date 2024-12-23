@@ -24,6 +24,7 @@ export const validateAuth = async (
 
   const jwt = authorization.replace("Bearer ", "").trim();
   const req = c.req.raw as unknown as IncomingMessage;
+  console.log(req);
   const nsid = parseReqNsid(req);
   const parsed = await verifyJwt(jwt, serviceDid, nsid, async (did: string) => {
     return didResolver.resolveAtprotoKey(did);
