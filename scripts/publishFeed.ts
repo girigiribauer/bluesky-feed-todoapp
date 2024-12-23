@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import fs from "fs/promises";
 import { AtpAgent } from "@atproto/api";
 
 (async () => {
@@ -15,6 +16,11 @@ import { AtpAgent } from "@atproto/api";
 
   console.log(`login by ${handle}`);
 
+  const image = await fs.readFile("./asset/icon.png");
+  const blobResponse = await agent.com.atproto.repo.uploadBlob(image, {
+    encoding: "image/png",
+  });
+
   await agent.com.atproto.repo.putRecord({
     repo: agent.session?.did ?? "",
     collection: "app.bsky.feed.generator",
@@ -24,9 +30,10 @@ import { AtpAgent } from "@atproto/api";
       displayName: "TODO feed",
       description:
         "TODO と頭につけた自分の投稿だけが表示されます\nDONE と返信すると消えます（テスト中）",
+      avatar: blobResponse.data.blob,
       createdAt: new Date().toISOString(),
     },
   });
 
-  console.log("publish");
+  console.log("published");
 })();
