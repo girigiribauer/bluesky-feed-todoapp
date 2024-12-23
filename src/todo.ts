@@ -35,24 +35,23 @@ export const getTodo = async (did: string): Promise<string[]> => {
       return true;
     }
 
-    return true;
-    // const threadResponse = await agent.app.bsky.feed.getPostThread({
-    //   uri: post.uri,
-    // });
-    // if (!isThreadViewPost(threadResponse.data.thread)) {
-    //   return false;
-    // }
+    const threadResponse = await agent.app.bsky.feed.getPostThread({
+      uri: post.uri,
+    });
+    if (!isThreadViewPost(threadResponse.data.thread)) {
+      return false;
+    }
 
-    // const replies = (threadResponse.data.thread.replies ?? []).filter((r) =>
-    //   isThreadViewPost(r)
-    // );
-    // return !!replies.find((r) => {
-    //   const record = r.post.record as Record;
-    //   const result = record.text
-    //     .toLowerCase()
-    //     .startsWith(replyTrigger.toLowerCase());
-    //   return result;
-    // });
+    const replies = (threadResponse.data.thread.replies ?? []).filter((r) =>
+      isThreadViewPost(r)
+    );
+    return !!replies.find((r) => {
+      const record = r.post.record as Record;
+      const result = record.text
+        .toLowerCase()
+        .startsWith(replyTrigger.toLowerCase());
+      return result;
+    });
   };
 
   const filtered = (
