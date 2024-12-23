@@ -1,6 +1,7 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { getTodo } from "./todo.js";
+import { validateAuth } from "./validate.js";
 
 const app = new Hono();
 
@@ -25,7 +26,9 @@ app.get("/.well-known/did.json", (c) =>
 );
 
 app.get("/xrpc/app.bsky.feed.getFeedSkeleton", async (c) => {
-  const todoPosts = await getTodo();
+  const did = await validateAuth(c, "did:web:todoapp.bsky.girigiribauer.com");
+  const todoPosts = await getTodo(did);
+
   return c.json({
     feed: todoPosts.map((uri) => ({
       post: uri,

@@ -6,28 +6,17 @@ import {
 } from "@atproto/api/dist/client/types/app/bsky/feed/defs.js";
 import type { Record } from "@atproto/api/dist/client/types/app/bsky/feed/post.js";
 
-export const getTodo = async (): Promise<string[]> => {
-  dotenv.config();
-  const handle = process.env.APP_HANDLE;
-  const password = process.env.APP_PASSWORD;
-  if (!handle || !password) {
-    console.log("invalid handle or password");
-    return [];
-  }
-
-  const agent = new AtpAgent({ service: "https://bsky.social" });
-  await agent.login({ identifier: handle, password });
-
+export const getTodo = async (did: string): Promise<string[]> => {
   const startTrigger = "TODO";
   const replyTrigger = "DONE";
 
-  if (!agent.did) {
-    return [];
-  }
+  const agent = new AtpAgent({
+    service: "https://public.api.bsky.app/",
+  });
 
   const searchResponse = await agent.app.bsky.feed.searchPosts({
     q: startTrigger,
-    author: agent.did,
+    author: did,
     limit: 100,
   });
   if (!searchResponse.success) {

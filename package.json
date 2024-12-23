@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@atproto/api": "^0.13.20",
+    "@atproto/identity": "^0.4.3",
+    "@atproto/xrpc-server": "^0.7.4",
     "@hono/node-server": "^1.13.7",
     "dotenv": "^16.4.7",
     "hono": "^4.6.14"
