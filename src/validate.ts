@@ -22,7 +22,7 @@ export const validateAuth = async (
   });
 
   const jwt = authorization.replace("Bearer ", "").trim();
-  const nsid = parseReqNsid(c.req);
+  const nsid = parseReqNsid(c.req.raw);
   const parsed = await verifyJwt(jwt, serviceDid, nsid, async (did: string) => {
     return didResolver.resolveAtprotoKey(did);
   });
