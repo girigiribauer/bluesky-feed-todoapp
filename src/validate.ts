@@ -6,6 +6,7 @@ import {
 import { DidResolver, MemoryCache } from "@atproto/identity";
 import type { Context } from "hono";
 import type { IncomingMessage } from "http";
+import { parseUrlNsid } from "@atproto/xrpc-server/dist/util.js";
 
 export const validateAuth = async (
   c: Context,
@@ -23,9 +24,8 @@ export const validateAuth = async (
   });
 
   const jwt = authorization.replace("Bearer ", "").trim();
-  const req = c.req.raw as unknown as IncomingMessage;
-  console.log(req);
-  const nsid = parseReqNsid(req);
+  const nsid = parseUrlNsid(c.req.path);
+
   const parsed = await verifyJwt(jwt, serviceDid, nsid, async (did: string) => {
     return didResolver.resolveAtprotoKey(did);
   });
