@@ -5,7 +5,6 @@ import {
 } from "@atproto/xrpc-server";
 import { DidResolver, MemoryCache } from "@atproto/identity";
 import type { Context } from "hono";
-import type { IncomingMessage } from "http";
 import { parseUrlNsid } from "@atproto/xrpc-server/dist/util.js";
 
 export const validateAuth = async (

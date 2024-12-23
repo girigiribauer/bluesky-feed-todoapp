@@ -45,12 +45,9 @@ export const getTodo = async (did: string): Promise<string[]> => {
     const replies = (threadResponse.data.thread.replies ?? []).filter((r) =>
       isThreadViewPost(r)
     );
-    return !!replies.find((r) => {
+    return !replies.find((r) => {
       const record = r.post.record as Record;
-      const result = record.text
-        .toLowerCase()
-        .startsWith(replyTrigger.toLowerCase());
-      return result;
+      return record.text.toLowerCase().startsWith(replyTrigger.toLowerCase());
     });
   };
 
