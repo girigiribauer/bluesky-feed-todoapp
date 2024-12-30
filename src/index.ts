@@ -12,7 +12,10 @@ app.get("/", (c) =>
 );
 
 app.get("/.well-known/did.json", (c) => {
-  console.log(c.req.raw);
+  const tmp = JSON.stringify(c.req, null, 2);
+  console.log(tmp);
+  const tmp2 = JSON.stringify(c.req.raw, null, 2);
+  console.log(tmp2);
 
   return c.json({
     "@context": ["https://www.w3.org/ns/did/v1"],
