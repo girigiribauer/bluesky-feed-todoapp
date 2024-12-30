@@ -29,7 +29,7 @@ import { AtpAgent } from "@atproto/api";
       did: "did:web:todoapp.bsky.girigiribauer.com",
       displayName: "TODO feed",
       description:
-        "TODO と頭につけた自分の投稿だけが表示されます\nDONE と返信すると消えます（テスト中）",
+        "TODO と頭につけた自分の投稿だけが表示されます\nDONE と返信すると消えます\nrender.com を無料プランでテストしてるので、15分だれも利用がないとサーバーが止まっちゃうみたいです。なんとかするので再読み込みなどしてみてください :pray:",
       avatar: blobResponse.data.blob,
       createdAt: new Date().toISOString(),
     },

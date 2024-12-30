@@ -11,8 +11,10 @@ app.get("/", (c) =>
   )
 );
 
-app.get("/.well-known/did.json", (c) =>
-  c.json({
+app.get("/.well-known/did.json", (c) => {
+  console.log(c.req.raw);
+
+  return c.json({
     "@context": ["https://www.w3.org/ns/did/v1"],
     id: "did:web:todoapp.bsky.girigiribauer.com",
     service: [
@@ -22,10 +24,12 @@ app.get("/.well-known/did.json", (c) =>
         serviceEndpoint: "https://todoapp.bsky.girigiribauer.com",
       },
     ],
-  })
-);
+  });
+});
 
 app.get("/xrpc/app.bsky.feed.getFeedSkeleton", async (c) => {
+  console.log(c.req.raw);
+
   const did = await validateAuth(c, "did:web:todoapp.bsky.girigiribauer.com");
   const todoPosts = await getTodo(did);
 

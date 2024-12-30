@@ -1,8 +1,4 @@
-import {
-  AuthRequiredError,
-  parseReqNsid,
-  verifyJwt,
-} from "@atproto/xrpc-server";
+import { AuthRequiredError, verifyJwt } from "@atproto/xrpc-server";
 import { DidResolver, MemoryCache } from "@atproto/identity";
 import type { Context } from "hono";
 import { parseUrlNsid } from "@atproto/xrpc-server/dist/util.js";
