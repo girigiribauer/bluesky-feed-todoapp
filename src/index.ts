@@ -14,7 +14,7 @@ app.get("/", (c) =>
 app.get("/.well-known/did.json", (c) => {
   const tmp = JSON.stringify(c.req, null, 2);
   console.log(tmp);
-  const tmp2 = JSON.stringify(c.req.raw, null, 2);
+  const tmp2 = JSON.stringify(c.req.header(), null, 2);
   console.log(tmp2);
 
   return c.json({
@@ -31,7 +31,10 @@ app.get("/.well-known/did.json", (c) => {
 });
 
 app.get("/xrpc/app.bsky.feed.getFeedSkeleton", async (c) => {
-  console.log(c.req.raw);
+  const tmp = JSON.stringify(c.req, null, 2);
+  console.log(tmp);
+  const tmp2 = JSON.stringify(c.req.header(), null, 2);
+  console.log(tmp2);
 
   const did = await validateAuth(c, "did:web:todoapp.bsky.girigiribauer.com");
   const todoPosts = await getTodo(did);
