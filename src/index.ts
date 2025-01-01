@@ -16,7 +16,7 @@ app.get("/.well-known/did.json", (c) => {
   console.log(tmp);
   const tmp2 = JSON.stringify(c.req.header(), null, 2);
   console.log(tmp2);
-  const tmp3 = JSON.stringify(c.req.param(), null, 2);
+  const tmp3 = JSON.stringify(c.req.query(), null, 2);
   console.log(tmp3);
 
   return c.json({
@@ -37,7 +37,7 @@ app.get("/xrpc/app.bsky.feed.getFeedSkeleton", async (c) => {
   console.log(tmp);
   const tmp2 = JSON.stringify(c.req.header(), null, 2);
   console.log(tmp2);
-  const tmp3 = JSON.stringify(c.req.param(), null, 2);
+  const tmp3 = JSON.stringify(c.req.query(), null, 2);
   console.log(tmp3);
 
   const did = await validateAuth(c, "did:web:todoapp.bsky.girigiribauer.com");
